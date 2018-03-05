@@ -80,6 +80,7 @@ class ResponsiveDrawer extends React.Component {
 
   componentWillMount() {
     this.props.fetchCategories();
+    this.props.fetchAllPosts();
   }
 
 
@@ -175,6 +176,19 @@ class ResponsiveDrawer extends React.Component {
                     <PostList posts={posts} loadPost={fetchAllPosts} />
                   )}
                 />
+                {this.props.posts.map(post => (
+                  <div key={post.id} >
+                    <Route
+                      exact
+                      path={`/${post.category}/${post.id}`}
+                      render={({ match }) => (
+                        <div>
+                          teste
+                        </div>
+                    )}
+                    />
+                  </div>
+                ))}
                 {this.props.categories.map(category => (
                   <div key={category.path} >
                     <Route
