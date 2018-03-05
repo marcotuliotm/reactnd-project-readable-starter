@@ -10,11 +10,14 @@ state = {
   save: false,
 }
 
-componentWillMount() {
-  this.props.loadPost();
-}
 
 render() {
+  let postsIn = [];
+  if (this.props.category !== null) {
+    postsIn = this.props.posts.filter(pos => pos.category === this.props.category);
+  } else {
+    postsIn = this.props.posts;
+  }
   return (
     <div>
       {this.state.save ? (
@@ -37,7 +40,7 @@ render() {
 
           </ul>
 
-          {this.props.posts.map(post => (
+          {postsIn.map(post => (
             <div key={post.id}>
               <Post
                 post={post}
@@ -53,12 +56,13 @@ render() {
 }
 
 PostList.propTypes = {
-  loadPost: PropTypes.func.isRequired,
+  category: PropTypes.string,
   posts: PropTypes.array,
 };
 
 PostList.defaultProps = {
   posts: [],
+  category: null,
 };
 
 

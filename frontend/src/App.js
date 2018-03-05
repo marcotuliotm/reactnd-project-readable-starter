@@ -173,7 +173,7 @@ class ResponsiveDrawer extends React.Component {
                   exact
                   path="/"
                   render={({ match }) => (
-                    <PostList posts={posts} loadPost={fetchAllPosts} />
+                    <PostList posts={posts} />
                   )}
                 />
                 {this.props.posts.map(post => (
@@ -197,7 +197,7 @@ class ResponsiveDrawer extends React.Component {
                       render={({ match }) => (
                         <PostList
                           posts={posts}
-                          loadPost={() => fetchAllPostsByCategory(category.path)}
+                          category={category.name}
                         />
                     )}
                     />
