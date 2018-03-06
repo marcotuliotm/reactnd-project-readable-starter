@@ -15,6 +15,7 @@ import MenuIcon from 'material-ui-icons/Menu';
 import withRoot from './withRoot';
 import MenuItem from './components/menuItem';
 import PostList from './components/postList';
+import PostInfo from './components/postInfo';
 import { Category } from './actions/category';
 import { PostAction } from './actions/post';
 
@@ -91,7 +92,7 @@ class ResponsiveDrawer extends React.Component {
 
   render() {
     const {
-      classes, theme, categories, posts, fetchAllPosts, fetchAllPostsByCategory,
+      classes, theme, categories, posts,
     } = this.props;
 
     const drawer = (
@@ -176,19 +177,14 @@ class ResponsiveDrawer extends React.Component {
                     <PostList posts={posts} />
                   )}
                 />
-                {this.props.posts.map(post => (
-                  <div key={post.id} >
-                    <Route
-                      exact
-                      path={`/${post.category}/${post.id}`}
-                      render={({ match }) => (
-                        <div>
-                          teste
-                        </div>
-                    )}
-                    />
-                  </div>
-                ))}
+
+
+                <Route
+                  exact
+                  path="/:category/:id"
+                  component={PostInfo}
+                />
+
                 {this.props.categories.map(category => (
                   <div key={category.path} >
                     <Route
@@ -221,7 +217,6 @@ ResponsiveDrawer.propTypes = {
   categories: PropTypes.array.isRequired,
   fetchAllPosts: PropTypes.func.isRequired,
   posts: PropTypes.array.isRequired,
-  fetchAllPostsByCategory: PropTypes.func.isRequired,
 };
 
 function mapStateToProps({ categories, posts }) {
@@ -235,7 +230,6 @@ function mapDispatchToProps(dispatch) {
   return {
     fetchCategories: data => dispatch(Category.getAllCategories(data)),
     fetchAllPosts: data => dispatch(PostAction.getAllPosts(data)),
-    fetchAllPostsByCategory: data => dispatch(PostAction.getAllPostsByCategory(data)),
   };
 }
 
