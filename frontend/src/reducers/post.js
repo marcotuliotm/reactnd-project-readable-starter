@@ -11,8 +11,10 @@ import {
   EDIT_COMMENT_SUCCESS,
   UPVOTE_COMMENT_SUCCESS,
   DOWNVOTE_COMMENT_SUCCESS,
-  SORT_BY_DATE,
-  SORT_BY_VOTE,
+  SORT_BY_DATE_DESC,
+  SORT_BY_VOTE_DESC,
+  SORT_BY_DATE_ASC,
+  SORT_BY_VOTE_ASC,
 } from './../actions/constants';
 import comments from './comment';
 
@@ -20,10 +22,14 @@ const posts = (state = [], action) => {
   switch (action.type) {
     case GET_ALL_POSTS_SUCCESS:
       return action.posts;
-    case SORT_BY_DATE:
+    case SORT_BY_DATE_ASC:
       return [...state.sort(compareTime)];
-    case SORT_BY_VOTE:
+    case SORT_BY_VOTE_ASC:
       return [...state.sort(compareVoteScore)];
+    case SORT_BY_DATE_DESC:
+      return [...state.sort(compareTimeDesc)];
+    case SORT_BY_VOTE_DESC:
+      return [...state.sort(compareVoteScoreDesc)];
     case CREATE_POST_SUCCESS:
       return [
         ...state,
@@ -128,5 +134,16 @@ function compareVoteScore(a, b) {
   return 0;
 }
 
+function compareTimeDesc(a, b) {
+  if (a.timestamp < b.timestamp) { return 1; }
+  if (a.timestamp > b.timestamp) { return -1; }
+  return 0;
+}
+
+function compareVoteScoreDesc(a, b) {
+  if (a.voteScore < b.voteScore) { return 1; }
+  if (a.voteScore > b.voteScore) { return -1; }
+  return 0;
+}
 
 export default posts;
