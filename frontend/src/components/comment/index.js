@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import DeleteIcon from 'material-ui-icons/Delete';
 import EditIcon from 'material-ui-icons/Edit';
-import AddIcon from 'material-ui-icons/Add';
-import RemoveIcon from 'material-ui-icons/Remove';
+import ThumbDownIcon from 'material-ui-icons/ThumbDown';
+import ThumbUpIcon from 'material-ui-icons/ThumbUp';
 import { CommentAction } from '../../actions/comment';
 
 
@@ -116,8 +116,8 @@ class Comment extends React.Component {
               <div className="btn-group" role="group">
                 <button type="button" className="btn btn-secondary" onClick={this.setEdit}>Edit  <EditIcon /></button>
                 <button type="button" className="btn btn-secondary" onClick={() => deleteCommentDisp(parentId, id)}>Delete <DeleteIcon /></button>
-                <button type="button" className="btn btn-secondary" onClick={() => upVoteCommentDips(parentId, id)}>  <AddIcon /> Votes: {voteScore}</button>
-                <button type="button" className="btn btn-secondary" onClick={() => downVoteCommentDips(parentId, id)}> <RemoveIcon /></button>
+                <button type="button" className="btn btn-secondary" onClick={() => upVoteCommentDips(parentId, id)}>  <ThumbUpIcon /> Votes: {voteScore}</button>
+                <button type="button" className="btn btn-secondary" onClick={() => downVoteCommentDips(parentId, id)}> <ThumbDownIcon /></button>
               </div>
             </div>
             )}

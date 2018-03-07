@@ -11,6 +11,8 @@ import {
   EDIT_COMMENT_SUCCESS,
   UPVOTE_COMMENT_SUCCESS,
   DOWNVOTE_COMMENT_SUCCESS,
+  SORT_BY_DATE,
+  SORT_BY_VOTE,
 } from './../actions/constants';
 import comments from './comment';
 
@@ -18,6 +20,10 @@ const posts = (state = [], action) => {
   switch (action.type) {
     case GET_ALL_POSTS_SUCCESS:
       return action.posts;
+    case SORT_BY_DATE:
+      return [...state.sort(compareTime)];
+    case SORT_BY_VOTE:
+      return [...state.sort(compareVoteScore)];
     case CREATE_POST_SUCCESS:
       return [
         ...state,
@@ -109,5 +115,18 @@ const post = (state = {}, action) => {
       return state;
   }
 };
+
+function compareTime(a, b) {
+  if (a.timestamp < b.timestamp) { return -1; }
+  if (a.timestamp > b.timestamp) { return 1; }
+  return 0;
+}
+
+function compareVoteScore(a, b) {
+  if (a.voteScore < b.voteScore) { return -1; }
+  if (a.voteScore > b.voteScore) { return 1; }
+  return 0;
+}
+
 
 export default posts;
