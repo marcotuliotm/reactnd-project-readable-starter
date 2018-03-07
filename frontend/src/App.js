@@ -15,6 +15,7 @@ import MenuIcon from 'material-ui-icons/Menu';
 import withRoot from './withRoot';
 import MenuItem from './components/menuItem';
 import PostList from './components/postList';
+import PostInfo from './components/postInfo';
 import { Category } from './actions/category';
 import { PostAction } from './actions/post';
 
@@ -80,6 +81,7 @@ class ResponsiveDrawer extends React.Component {
 
   componentWillMount() {
     this.props.fetchCategories();
+    this.props.fetchAllPosts();
   }
 
 
@@ -90,7 +92,7 @@ class ResponsiveDrawer extends React.Component {
 
   render() {
     const {
-      classes, theme, categories, posts, fetchAllPosts, fetchAllPostsByCategory,
+      classes, theme, categories, posts,
     } = this.props;
 
     const drawer = (
@@ -172,9 +174,17 @@ class ResponsiveDrawer extends React.Component {
                   exact
                   path="/"
                   render={({ match }) => (
-                    <PostList posts={posts} loadPost={fetchAllPosts} />
+                    <PostList posts={posts} />
                   )}
                 />
+
+
+                <Route
+                  exact
+                  path="/:category/:id"
+                  component={PostInfo}
+                />
+
                 {this.props.categories.map(category => (
                   <div key={category.path} >
                     <Route
@@ -183,7 +193,7 @@ class ResponsiveDrawer extends React.Component {
                       render={({ match }) => (
                         <PostList
                           posts={posts}
-                          loadPost={() => fetchAllPostsByCategory(category.path)}
+                          category={category.name}
                         />
                     )}
                     />
@@ -207,7 +217,6 @@ ResponsiveDrawer.propTypes = {
   categories: PropTypes.array.isRequired,
   fetchAllPosts: PropTypes.func.isRequired,
   posts: PropTypes.array.isRequired,
-  fetchAllPostsByCategory: PropTypes.func.isRequired,
 };
 
 function mapStateToProps({ categories, posts }) {
@@ -221,7 +230,6 @@ function mapDispatchToProps(dispatch) {
   return {
     fetchCategories: data => dispatch(Category.getAllCategories(data)),
     fetchAllPosts: data => dispatch(PostAction.getAllPosts(data)),
-    fetchAllPostsByCategory: data => dispatch(PostAction.getAllPostsByCategory(data)),
   };
 }
 

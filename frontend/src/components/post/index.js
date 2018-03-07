@@ -7,6 +7,7 @@ import DeleteIcon from 'material-ui-icons/Delete';
 import EditIcon from 'material-ui-icons/Edit';
 import AddIcon from 'material-ui-icons/Add';
 import RemoveIcon from 'material-ui-icons/Remove';
+import { NavLink } from 'react-router-dom';
 import { PostAction } from '../../actions/post';
 import { CommentAction } from '../../actions/comment';
 import CommentList from '../commentList';
@@ -151,9 +152,13 @@ class Post extends React.Component {
           ) : (
             <div>
               <div>
-                <h5 className="card-title">{title}</h5>
+                <NavLink to={`/${category}/${id}`} onClick={e => e.onSubmit()}>
+                  <h5 className="card-title">{title}</h5>
+                </NavLink>
                 <p className="card-text">{body}</p>
+
                 <H6>Posted by: {author} on {datePost}</H6>
+
                 <div className="btn-group" role="group">
                   <button type="button" className="btn btn-secondary" onClick={this.setEdit}>Edit  <EditIcon /></button>
                   <button type="button" className="btn btn-secondary" onClick={this.setCommentsShow}>Comments ({commentCount}) <ChatIcon /></button>
