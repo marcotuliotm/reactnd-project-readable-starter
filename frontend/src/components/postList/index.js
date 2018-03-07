@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import AddIcon from 'material-ui-icons/Add';
 import DateIcon from 'material-ui-icons/Update';
 import ThumbUpIcon from 'material-ui-icons/ThumbUp';
+import ThumbDown from 'material-ui-icons/ThumbDown';
 import Post from '../post';
 import CreatePost from '../createPost';
 import { PostAction } from '../../actions/post';
@@ -17,7 +18,8 @@ state = {
 
 render() {
   const {
-    posts, category, getSortByDateDisp, getSortByVoteDisp,
+    posts, category, getSortByDateAscDisp, getSortByVoteAscDisp,
+    getSortByVoteDescDisp, getSortByDateDescDisp,
   } = this.props;
   let postsIn = [];
   if (category !== null) {
@@ -44,16 +46,30 @@ render() {
                 <button
                   type="button"
                   className="btn btn-secondary"
-                  onClick={getSortByDateDisp}
+                  onClick={getSortByDateAscDisp}
                 >
-                  Order by Date <DateIcon />
+                 Date Asc <DateIcon />
                 </button>
                 <button
                   type="button"
                   className="btn btn-secondary"
-                  onClick={getSortByVoteDisp}
+                  onClick={getSortByDateDescDisp}
                 >
-                  Order by Vote <ThumbUpIcon />
+                 Date Desc <DateIcon />
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  onClick={getSortByVoteAscDisp}
+                >
+                  Vote Asc <ThumbUpIcon />
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  onClick={getSortByVoteDescDisp}
+                >
+                  Vote Desc <ThumbDown />
                 </button>
 
               </div>
@@ -79,8 +95,10 @@ render() {
 PostList.propTypes = {
   category: PropTypes.string,
   posts: PropTypes.array,
-  getSortByDateDisp: PropTypes.func.isRequired,
-  getSortByVoteDisp: PropTypes.func.isRequired,
+  getSortByDateAscDisp: PropTypes.func.isRequired,
+  getSortByVoteAscDisp: PropTypes.func.isRequired,
+  getSortByDateDescDisp: PropTypes.func.isRequired,
+  getSortByVoteDescDisp: PropTypes.func.isRequired,
 };
 
 PostList.defaultProps = {
@@ -97,8 +115,10 @@ function mapStateToProps({ posts }) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    getSortByDateDisp: data => dispatch(PostAction.getSortByDate(data)),
-    getSortByVoteDisp: data => dispatch(PostAction.getSortByVote(data)),
+    getSortByDateAscDisp: data => dispatch(PostAction.getSortByDateAsc(data)),
+    getSortByVoteAscDisp: data => dispatch(PostAction.getSortByVoteAsc(data)),
+    getSortByDateDescDisp: data => dispatch(PostAction.getSortByDateDesc(data)),
+    getSortByVoteDescDisp: data => dispatch(PostAction.getSortByVoteDesc(data)),
   };
 }
 
