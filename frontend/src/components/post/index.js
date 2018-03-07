@@ -5,8 +5,8 @@ import { connect } from 'react-redux';
 import ChatIcon from 'material-ui-icons/Chat';
 import DeleteIcon from 'material-ui-icons/Delete';
 import EditIcon from 'material-ui-icons/Edit';
-import AddIcon from 'material-ui-icons/Add';
-import RemoveIcon from 'material-ui-icons/Remove';
+import ThumbDownIcon from 'material-ui-icons/ThumbDown';
+import ThumbUpIcon from 'material-ui-icons/ThumbUp';
 import { NavLink } from 'react-router-dom';
 import { PostAction } from '../../actions/post';
 import { CommentAction } from '../../actions/comment';
@@ -163,8 +163,8 @@ class Post extends React.Component {
                   <button type="button" className="btn btn-secondary" onClick={this.setEdit}>Edit  <EditIcon /></button>
                   <button type="button" className="btn btn-secondary" onClick={this.setCommentsShow}>Comments ({commentCount}) <ChatIcon /></button>
                   <button type="button" className="btn btn-secondary" onClick={() => deletePostDisp(id)}>Delete <DeleteIcon /></button>
-                  <button type="button" className="btn btn-secondary" onClick={() => upVotePostDips(id)}>  <AddIcon /> Votes: {voteScore}</button>
-                  <button type="button" className="btn btn-secondary" onClick={() => downVotePostDips(id)}> <RemoveIcon /></button>
+                  <button type="button" className="btn btn-secondary" onClick={() => upVotePostDips(id)}>  <ThumbUpIcon /> Votes: {voteScore}</button>
+                  <button type="button" className="btn btn-secondary" onClick={() => downVotePostDips(id)}> <ThumbDownIcon /></button>
                 </div>
 
               </div>
@@ -185,10 +185,7 @@ class Post extends React.Component {
 }
 
 Post.propTypes = {
-
   deletePostDisp: PropTypes.func.isRequired,
-
-
   upVotePostDips: PropTypes.func.isRequired,
   downVotePostDips: PropTypes.func.isRequired,
   editPostDips: PropTypes.func.isRequired,
