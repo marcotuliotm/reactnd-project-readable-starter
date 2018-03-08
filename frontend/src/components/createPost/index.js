@@ -67,12 +67,13 @@ class CreatePost extends React.Component {
         <div className="card-header">New Post</div>
         <div className="card-body text-secondary">
 
-          <form className="form-horizontal">
+          <form className="form-horizontal" onSubmit={this.onSave}>
             <div className="form-group">
               <label htmlFor="inputTitle">
                 Tittle
               </label>
               <Input
+                required
                 value={title}
                 onChange={e =>
                   this.setState({
@@ -89,6 +90,7 @@ class CreatePost extends React.Component {
                 Body
               </label>
               <Input
+                required
                 value={body}
                 onChange={e =>
                   this.setState({
@@ -105,6 +107,7 @@ class CreatePost extends React.Component {
                 Author
               </label>
               <Input
+                required
                 value={author}
                 onChange={e =>
                   this.setState({
@@ -147,7 +150,7 @@ class CreatePost extends React.Component {
                   Cancel
                 </button>
 
-                <button className="btn btn-primary" onClick={this.onSave}>
+                <button className="btn btn-primary" >
                   Save
                 </button>
               </DivButtons>
