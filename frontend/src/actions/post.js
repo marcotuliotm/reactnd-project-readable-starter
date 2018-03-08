@@ -7,10 +7,6 @@ import {
   UPVOTE_POST_SUCCESS,
   DOWNVOTE_POST_SUCCESS,
   UPDATE_POST_COMMENTS,
-  SORT_BY_DATE_ASC,
-  SORT_BY_VOTE_ASC,
-  SORT_BY_DATE_DESC,
-  SORT_BY_VOTE_DESC,
 } from './constants';
 
 
@@ -50,26 +46,6 @@ const createPostSuccess = post => ({
 });
 
 export class PostAction {
-  static getSortByDateAsc = () => (dispatch) => {
-    dispatch({
-      type: SORT_BY_DATE_ASC,
-    });
-  }
-  static getSortByVoteAsc = () => (dispatch) => {
-    dispatch({
-      type: SORT_BY_VOTE_ASC,
-    });
-  }
-  static getSortByDateDesc = () => (dispatch) => {
-    dispatch({
-      type: SORT_BY_DATE_DESC,
-    });
-  }
-  static getSortByVoteDesc = () => (dispatch) => {
-    dispatch({
-      type: SORT_BY_VOTE_DESC,
-    });
-  }
   static updatePostComments = (parentId, commments) => (dispatch) => {
     dispatch({
       type: UPDATE_POST_COMMENTS,

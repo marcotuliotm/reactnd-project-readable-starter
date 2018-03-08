@@ -7,7 +7,8 @@ import ThumbUpIcon from 'material-ui-icons/ThumbUp';
 import ThumbDown from 'material-ui-icons/ThumbDown';
 import Post from '../post';
 import CreatePost from '../createPost';
-import { PostAction } from '../../actions/post';
+import { SortAction } from '../../actions/sort';
+import sortUtil from '../../util/sortUtil';
 
 
 class PostList extends React.Component {
@@ -106,20 +107,21 @@ PostList.defaultProps = {
   category: null,
 };
 
-function mapStateToProps({ posts }) {
+function mapStateToProps({ posts, sort }) {
   return {
-    posts,
+    ...posts.sort(sortUtil(sort)),
   };
 }
 
 
 function mapDispatchToProps(dispatch) {
   return {
-    getSortByDateAscDisp: data => dispatch(PostAction.getSortByDateAsc(data)),
-    getSortByVoteAscDisp: data => dispatch(PostAction.getSortByVoteAsc(data)),
-    getSortByDateDescDisp: data => dispatch(PostAction.getSortByDateDesc(data)),
-    getSortByVoteDescDisp: data => dispatch(PostAction.getSortByVoteDesc(data)),
+    getSortByDateAscDisp: data => dispatch(SortAction.getSortByDateAsc(data)),
+    getSortByVoteAscDisp: data => dispatch(SortAction.getSortByVoteAsc(data)),
+    getSortByDateDescDisp: data => dispatch(SortAction.getSortByDateDesc(data)),
+    getSortByVoteDescDisp: data => dispatch(SortAction.getSortByVoteDesc(data)),
   };
 }
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostList);
