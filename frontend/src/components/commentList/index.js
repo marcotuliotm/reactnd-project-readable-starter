@@ -33,30 +33,27 @@ render() {
             </li>
 
           </ul>
-          {commentsPost.map(comment => (
-            <div key={comment.id}>
-              <Comment
-                parentId={comment.parentId}
-                id={comment.id}
-                body={comment.body}
-                author={comment.author}
-                timestamp={comment.timestamp}
-                voteScore={comment.voteScore}
-              />
-            </div>
+
+          <div>
+            {commentsPost.map(comment => (
+              <div key={comment.id}>
+                <Comment
+                  parentId={comment.parentId}
+                  id={comment.id}
+                  body={comment.body}
+                  author={comment.author}
+                  timestamp={comment.timestamp}
+                  voteScore={comment.voteScore}
+                />
+              </div>
         ))}
+          </div>
+
         </div>
         )}
       <ul className="list-group">
         <li className="list-group-item">
           <div className="btn-group" role="group">
-            <button
-              type="button"
-              className="btn btn-secondary"
-              onClick={this.props.onClose}
-            >
-                  Close
-            </button>
             <button
               type="button"
               className="btn btn-primary"
@@ -77,9 +74,11 @@ render() {
 
 CommentList.propTypes = {
   parentId: PropTypes.string.isRequired,
-  onClose: PropTypes.func.isRequired,
-  comments: PropTypes.array.isRequired,
+  comments: PropTypes.array,
 };
 
+CommentList.defaultProps = {
+  comments: [],
+};
 
 export default CommentList;
