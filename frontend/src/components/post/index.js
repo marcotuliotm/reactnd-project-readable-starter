@@ -10,7 +10,6 @@ import ThumbUpIcon from 'material-ui-icons/ThumbUp';
 import { NavLink } from 'react-router-dom';
 import { PostAction } from '../../actions/post';
 import { CommentAction } from '../../actions/comment';
-import CommentList from '../commentList';
 
 
 const H6 = styled.h6`
@@ -41,10 +40,10 @@ class Post extends React.Component {
     title: '',
     body: '',
     edit: false,
-    commentsShow: false,
+
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.fetchAllCommentsByPost(this.props.post.id);
   }
 
@@ -58,9 +57,6 @@ class Post extends React.Component {
     this.setState({ edit: false });
   }
 
-  setCommentsShow = () => {
-    this.setState({ commentsShow: true });
-  }
 
   setEdit = () => {
     const {
@@ -69,9 +65,6 @@ class Post extends React.Component {
     this.setState({ title, body, edit: true });
   }
 
-  closeCommentsShow = () => {
-    this.setState({ commentsShow: false });
-  }
 
   cancelEdit = () => {
     this.setState({ edit: false });
@@ -80,7 +73,6 @@ class Post extends React.Component {
 
   render() {
     const {
-      comments,
       timestamp,
       title, body,
       author, category,
@@ -168,12 +160,6 @@ class Post extends React.Component {
                 </div>
 
               </div>
-              {this.state.commentsShow ?
-              (<CommentList
-                parentId={id}
-                comments={comments}
-                onClose={this.closeCommentsShow}
-              />) : (null)}
 
             </div>
             )}

@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import AddIcon from 'material-ui-icons/Add';
 import Post from '../post';
 import CreatePost from '../createPost';
+import CommentList from '../commentList';
 
 const H6 = styled.h6`
   color: #707172;
@@ -47,7 +48,11 @@ render() {
             <Post
               post={postInfo}
             />
-
+            <CommentList
+              parentId={postInfo.id}
+              comments={postInfo.comments}
+              onClose={this.closeCommentsShow}
+            />
 
           </div>
           )}
