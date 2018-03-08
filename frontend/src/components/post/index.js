@@ -87,12 +87,13 @@ class Post extends React.Component {
         <div className="card-header">{text}</div>
         <div className="card-body text-secondary">
           {this.state.edit ? (
-            <form className="form-horizontal">
+            <form className="form-horizontal" onSubmit={this.onEdit}>
               <div className="form-group">
                 <label htmlFor="inputTitle">
                   Title
                 </label>
                 <Input
+                  required
                   value={this.state.title}
                   onChange={e =>
                     this.setState({
@@ -109,6 +110,7 @@ class Post extends React.Component {
                   Body
                 </label>
                 <Input
+                  required
                   value={this.state.body}
                   onChange={e =>
                     this.setState({
@@ -130,7 +132,7 @@ class Post extends React.Component {
                     Cancel
                   </button>
 
-                  <button className="btn btn-primary" onClick={this.onEdit}>
+                  <button className="btn btn-primary" >
                     Save
                   </button>
                 </DivButtons>

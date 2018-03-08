@@ -75,12 +75,13 @@ class Comment extends React.Component {
 
         <div className="card-body text-secondary">
           {this.state.edit ? (
-            <form className="form-horizontal">
+            <form className="form-horizontal" onSubmit={this.onEdit}>
               <div className="form-group">
                 <label htmlFor="inputBody">
                   Body
                 </label>
                 <Input
+                  required
                   value={this.state.body}
                   onChange={e =>
                     this.setState({
@@ -102,7 +103,7 @@ class Comment extends React.Component {
                     Cancel
                   </button>
 
-                  <button className="btn btn-primary" onClick={this.onEdit}>
+                  <button className="btn btn-primary">
                     Save
                   </button>
                 </DivButtons>

@@ -61,12 +61,13 @@ class CreateComment extends React.Component {
         <div className="card-header">New Comment</div>
         <div className="card-body text-secondary">
 
-          <form className="form-horizontal">
+          <form className="form-horizontal" onSubmit={this.onSave}>
             <div className="form-group">
               <label htmlFor="inputBody">
                 Body
               </label>
               <Input
+                required
                 value={body}
                 onChange={e =>
                   this.setState({
@@ -83,6 +84,7 @@ class CreateComment extends React.Component {
                 Author
               </label>
               <Input
+                required
                 value={author}
                 onChange={e =>
                   this.setState({
@@ -104,7 +106,7 @@ class CreateComment extends React.Component {
                   Cancel
                 </button>
 
-                <button className="btn btn-primary" onClick={this.onSave}>
+                <button className="btn btn-primary">
                   Save
                 </button>
               </DivButtons>
