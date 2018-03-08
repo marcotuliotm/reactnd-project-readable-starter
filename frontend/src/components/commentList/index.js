@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import AddIcon from 'material-ui-icons/Add';
 import Comment from '../comment';
 import CreateComment from '../createComment';
+import { CommentAction } from '../../actions/comment';
 
 
 class CommentList extends React.Component {
@@ -10,6 +12,9 @@ state = {
   save: false,
 }
 
+componentDidMount() {
+  this.props.fetchAllCommentsByPost(this.props.parentId);
+}
 
 render() {
   const commentsPost = this.props.comments;
@@ -75,10 +80,23 @@ render() {
 CommentList.propTypes = {
   parentId: PropTypes.string.isRequired,
   comments: PropTypes.array,
+  fetchAllCommentsByPost: PropTypes.func.isRequired,
 };
 
 CommentList.defaultProps = {
   comments: [],
 };
 
-export default CommentList;
+function mapStateToProps({ posts }) {
+  return {
+    posts,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    fetchAllCommentsByPost: data => dispatch(CommentAction.getAllComments(data)),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CommentList);
