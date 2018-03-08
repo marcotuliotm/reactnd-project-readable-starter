@@ -9,7 +9,6 @@ import ThumbDownIcon from 'material-ui-icons/ThumbDown';
 import ThumbUpIcon from 'material-ui-icons/ThumbUp';
 import { NavLink } from 'react-router-dom';
 import { PostAction } from '../../actions/post';
-import { CommentAction } from '../../actions/comment';
 
 
 const H6 = styled.h6`
@@ -41,10 +40,6 @@ class Post extends React.Component {
     body: '',
     edit: false,
 
-  }
-
-  componentDidMount() {
-    this.props.fetchAllCommentsByPost(this.props.post.id);
   }
 
   onEdit = (e) => {
@@ -175,7 +170,6 @@ Post.propTypes = {
   upVotePostDips: PropTypes.func.isRequired,
   downVotePostDips: PropTypes.func.isRequired,
   editPostDips: PropTypes.func.isRequired,
-  fetchAllCommentsByPost: PropTypes.func.isRequired,
   post: PropTypes.object.isRequired,
 };
 
@@ -187,7 +181,7 @@ function mapStateToProps({ posts }) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    fetchAllCommentsByPost: data => dispatch(CommentAction.getAllComments(data)),
+
     deletePostDisp: data => dispatch(PostAction.deletePost(data)),
     upVotePostDips: data => dispatch(PostAction.upVotePost(data)),
     downVotePostDips: data => dispatch(PostAction.downVotePost(data)),
