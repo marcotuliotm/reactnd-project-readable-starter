@@ -16,6 +16,7 @@ import withRoot from './withRoot';
 import MenuItem from './components/menuItem';
 import PostList from './components/postList';
 import PostInfo from './components/postInfo';
+import ChartPost from './components/chart';
 import { Category } from './actions/category';
 import { PostAction } from './actions/post';
 
@@ -100,6 +101,12 @@ class ResponsiveDrawer extends React.Component {
         <div className={classes.drawerHeader} />
         <Divider />
         <List>
+          <MenuItem href="/chart" >
+            Chart
+          </MenuItem>
+          <Divider />
+        </List>
+        <List>
           <MenuItem href="/" >
             All
           </MenuItem>
@@ -170,6 +177,15 @@ class ResponsiveDrawer extends React.Component {
                 </Drawer>
               </Hidden>
               <main className={classes.content}>
+
+                <Route
+                  exact
+                  path="/chart"
+                  render={({ match }) => (
+                    <ChartPost posts={posts} />
+                  )}
+                />
+
                 <Route
                   exact
                   path="/"
@@ -177,7 +193,6 @@ class ResponsiveDrawer extends React.Component {
                     <PostList posts={posts} />
                   )}
                 />
-
 
                 <Route
                   exact
