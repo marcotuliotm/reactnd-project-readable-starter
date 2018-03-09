@@ -146,11 +146,10 @@ class Post extends React.Component {
                 </NavLink>
                 <p className="card-text">{body}</p>
 
-                <H6>Posted by: {author} on {datePost}</H6>
-
+                <H6>Posted by: {author} on {datePost} and   ({commentCount})  <ChatIcon />
+                </H6>
                 <div className="btn-group" role="group">
                   <button type="button" className="btn btn-secondary" onClick={this.setEdit}>Edit  <EditIcon /></button>
-                  <button type="button" className="btn btn-secondary" onClick={this.setCommentsShow}>Comments ({commentCount}) <ChatIcon /></button>
                   <button type="button" className="btn btn-secondary" onClick={() => deletePostDisp(id)}>Delete <DeleteIcon /></button>
                   <button type="button" className="btn btn-secondary" onClick={() => upVotePostDips(id)}>  <ThumbUpIcon /> Votes: {voteScore}</button>
                   <button type="button" className="btn btn-secondary" onClick={() => downVotePostDips(id)}> <ThumbDownIcon /></button>
