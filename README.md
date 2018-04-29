@@ -11,4 +11,4 @@ This is the starter project for the final assessment project for Udacity's Redux
 ## Start Front
     - `cd frontEnd`
     - `npm install`
-    - `node server`
+    - `yarn start`
